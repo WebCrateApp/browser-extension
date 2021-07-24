@@ -1,0 +1,47 @@
+{
+  "name": "webcrate-extension",
+  "version": "0.1.0",
+  "description": "Add links to WebCrate via a browser extension",
+  "permissions": [
+    "https://*.webcrate.app/*",
+    "https://*.deta.dev/*",
+    "activeTab",
+    "storage"
+  ],
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options/index.html"
+  },
+  "browser_action": {
+    "default_title": "Add a link",
+    "default_popup": "popup/index.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+L",
+        "mac": "MacCtrl+L"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "512": "icons/icon.png"
+  },
+  "manifest_version": 2
+}

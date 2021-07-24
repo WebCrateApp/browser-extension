@@ -1,0 +1,55 @@
+{
+  "name": "webcrate-extension",
+  "version": "0.1.0",
+  "description": "Add links to WebCrate via a browser extension",
+  "author": "Maximilian Schiller <schiller@mxis.ch>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebCrateApp/browser-extension.git"
+  },
+  "homepage": "https://webcrate.app",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "update-manifest": "node scripts/update-manifest.js",
+    "clean": "rimraf dist",
+    "build-dist": "cross-env NODE_ENV=production webpack --hide-modules",
+    "build-zip": "node scripts/build-zip.js",
+    "prebuild": "npm run clean",
+    "predev": "npm run clean",
+    "lint": "eslint ./src",
+    "dev": "cross-env NODE_ENV=development webpack --watch",
+    "build": "npm run update-manifest && npm run build-dist && npm run build-zip"
+  },
+  "dependencies": {
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/runtime-corejs3": "^7.14.8",
+    "@betahuhn/config": "^1.1.0",
+    "@types/chrome": "^0.0.134",
+    "archiver": "^3.0.0",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^5.1.1",
+    "core-js": "^3.15.2",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.4.0",
+    "ejs": "^2.6.1",
+    "eslint": "^7.31.0",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.0.0",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^10.1.1",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-extension-reloader": "^1.1.0"
+  }
+}
