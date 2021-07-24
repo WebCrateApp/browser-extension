@@ -24,6 +24,7 @@
     "build": "npm run update-manifest && npm run build-dist && npm run build-zip"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "vue": "^2.6.14"
   },
   "devDependencies": {

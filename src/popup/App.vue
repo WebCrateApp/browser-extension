@@ -1,19 +1,25 @@
 <template>
-	<div class="wrapper">
-		<h1>Add a new link to your WebCrate</h1>
+	<div v-if="state === 'load'" class="wrapper">
+		<h1>Add a new link to your <a :href="detaInstance" target="_blank">WebCrate</a></h1>
 		<input v-model="url" class="input" placeholder="url">
-        <button class="button">Add Link</button>
-		<p>{{ detaInstance }}</p>
+        <button class="button" @click.stop="create">Add Link</button>
+	</div>
+	<div v-else-if="state === 'success'" class="wrapper">
+		<h1>Link added!</h1>
+		<a :href="`${ this.detaInstance }/?link=${ link.id }`" class="button" target="_blank">View link</a>
 	</div>
 </template>
 
 <script>
+	import axios from 'axios'
+
 	import '../main.scss'
-	const appDomain = "https://fra2.webcrate.app";
 
 	export default {
 		data() {
 			return {
+				state: 'load',
+				link: undefined,
 				url: undefined,
 				detaInstance: undefined
 			}
@@ -39,10 +45,17 @@
 				})
 			},
 			create: async function () {
-				chrome.tabs.create({
-					url: `${appDomain}/login`,
-					active: true
+				const { data } = await axios.post(`${ this.detaInstance }/api/link`, {
+					url: this.url
 				})
+
+				if (data.status === 200) {
+					this.link = data.data
+					this.url = undefined
+					this.state = 'success'
+				} else {
+					console.log(data)
+				}
 			}
 		},
 		created() {
@@ -57,7 +70,8 @@
 <style lang="scss" scoped>
 	.wrapper {
 		text-align: center;
-		padding: 1rem;
+		padding: 1.5rem;
+		padding-bottom: 2rem;
 		background: var(--background);
 		border-radius: var(--border-radius);
 	}
