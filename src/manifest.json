@@ -1,7 +1,10 @@
 {
-  "name": "webcrate-extension",
+  "name": "WebCrate Browser Extension",
+  "short_name": "WebCrate",
+  "author": "Maximilian Schiller <maxi@webcrate.app>",
   "version": "0.1.0",
-  "description": "Add links to WebCrate via a browser extension",
+  "description": "Add links to your WebCrate directly via the browser.",
+  "homepage_url": "https://webcrate.app",
   "permissions": [
     "https://*.webcrate.app/*",
     "https://*.deta.dev/*",
@@ -24,6 +27,7 @@
       }
     }
   },
+  "omnibox": { "keyword" : "wc" },
   "background": {
     "scripts": [
       "background.js"

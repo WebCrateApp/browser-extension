@@ -1,18 +1,30 @@
 <template>
 	<div v-if="state === 'load'" class="wrapper">
-		<h1>Add a new link to your <a :href="detaInstance" target="_blank">WebCrate</a></h1>
 		<input v-model="url" class="input" placeholder="url">
-        <button class="button" @click.stop="create">Add Link</button>
+		<div class="actions">
+			<button class="primary-button" @click.stop="create">Add Link</button>
+			<a :href="this.detaInstance" target="_blank">
+				<button class="button">Open WebCrate</button>
+			</a>
+		</div>
 	</div>
 	<div v-else-if="state === 'success'" class="wrapper">
 		<h1>Link added!</h1>
-		<a :href="`${ this.detaInstance }/?link=${ link.id }`" class="button" target="_blank">View link</a>
+		<a :href="`${ this.detaInstance }/?link=${ link.id }`" target="_blank">
+			<button class="primary-button">View link</button>
+		</a>
+	</div>
+	<div v-else-if="state === 'login'" class="wrapper">
+		<h1>{{ errorMsg }}</h1>
+		<p>Please login to your WebCrate instance and try again!</p>
+		<a href="https://deta.space/login" target="_blank">
+			<button class="primary-button">Login to add a link</button>
+		</a>
 	</div>
 </template>
 
 <script>
 	import axios from 'axios'
-
 	import '../main.scss'
 
 	export default {
@@ -21,7 +33,19 @@
 				state: 'load',
 				link: undefined,
 				url: undefined,
-				detaInstance: undefined
+				detaInstance: undefined,
+				errorMsgs: [
+					'Oh oh!',
+					'Whoops!',
+					'Not logged in',
+					'Looks like you need to login',
+					'Looks like you\'re not logged in'
+				]
+			}
+		},
+		computed: {
+			errorMsg() {
+				return this.errorMsgs[Math.floor(Math.random() * this.errorMsgs.length)]
 			}
 		},
 		methods: {
@@ -45,22 +69,30 @@
 				})
 			},
 			create: async function () {
-				const { data } = await axios.post(`${ this.detaInstance }/api/link`, {
+				const res = await axios.post(`${ this.detaInstance }/api/link`, {
 					url: this.url
 				})
 
-				if (data.status === 200) {
-					this.link = data.data
+				console.log(res)
+
+				if (res.request.responseURL.includes('deta.space/login')) {
+					console.log('Not authorized')
+					this.state === 'login'
+					return
+				}
+
+				if (res.data.status === 200) {
+					this.link = res.data.data
 					this.url = undefined
 					this.state = 'success'
 				} else {
-					console.log(data)
+					console.log(res.data)
 				}
 			}
 		},
 		created() {
 			this.getCurrentUrl()
-			chrome.storage.sync.get((items) => {
+			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
 			})
 		}
@@ -81,7 +113,18 @@
         font-size: 1.2rem;
     }
 
-    button {
-        margin-top: 1rem;
-    }
+	p {
+		margin-bottom: 1rem;
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1rem;
+
+		& a {
+			margin-left: 1rem;
+		}
+	}
 </style>

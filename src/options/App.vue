@@ -6,8 +6,13 @@
 			<p>To use the extension you need to connect it to your own WebCrate instance. Learn more in the <a href="https://webcrate.app/docs">documentation</a>.</p>
 			<hr>
 			<label for="input">Deta Space instance:</label>
-			<input v-model="detaInstance" id="input" class="input" placeholder="url">
-			<button class="primary-button" @click.stop="save">{{ saveText }}</button>
+			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.dev">
+			<div class="actions">
+				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
+				<a href="https://open.webcrate.app" target="_blank">
+					<button class="button">Open WebCrate</button>
+				</a>
+			</div>
 		</div>
 	</div>
 </template>
@@ -25,7 +30,7 @@
 		},
 		methods: {
 			save() {
-				chrome.storage.sync.set({ detaInstance: this.url }, () => {
+				chrome.storage.local.set({ detaInstance: this.url }, () => {
 					this.saveText = 'Saved!'
 
 					setTimeout(() => {
@@ -41,7 +46,7 @@
 			Logo
 		},
 		created() {
-			chrome.storage.sync.get((items) => {
+			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
 			})
 		}
@@ -103,7 +108,13 @@
 		}
 	}
 
-    button {
-        margin-top: 1rem;
-    }
+	.actions {
+		display: flex;
+		align-items: center;
+		margin-top: 1rem;
+
+		& a {
+			margin-left: 1rem;
+		}
+	}
 </style>
