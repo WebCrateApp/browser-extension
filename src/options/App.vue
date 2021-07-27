@@ -10,7 +10,7 @@
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
 				<a href="https://open.webcrate.app" target="_blank">
-					<button class="button">Open WebCrate</button>
+					<button class="button">Open your WebCrate</button>
 				</a>
 			</div>
 		</div>
@@ -25,16 +25,16 @@
 		data() {
 			return {
 				detaInstance: undefined,
-				saveText: 'Save'
+				saveText: 'Save Settings'
 			}
 		},
 		methods: {
 			save() {
-				chrome.storage.local.set({ detaInstance: this.url }, () => {
+				chrome.storage.sync.set({ detaInstance: this.detaInstance }, () => {
 					this.saveText = 'Saved!'
 
 					setTimeout(() => {
-						this.saveText = 'Save'
+						this.saveText = 'Save Settings'
 					}, 1000)
 				})
 			},
@@ -46,7 +46,8 @@
 			Logo
 		},
 		created() {
-			chrome.storage.local.get((items) => {
+			chrome.storage.sync.get((items) => {
+				console.log(items)
 				this.detaInstance = items.detaInstance
 			})
 		}

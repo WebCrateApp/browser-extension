@@ -92,7 +92,7 @@
 		},
 		created() {
 			this.getCurrentUrl()
-			chrome.storage.local.get((items) => {
+			chrome.storage.sync.get((items) => {
 				this.detaInstance = items.detaInstance
 			})
 		}
