@@ -73,8 +73,6 @@
 					url: this.url
 				})
 
-				console.log(res)
-
 				if (res.request.responseURL.includes('deta.space/login')) {
 					console.log('Not authorized')
 					this.state === 'login'
@@ -87,12 +85,13 @@
 					this.state = 'success'
 				} else {
 					console.log(res.data)
+					this.state === 'login'
 				}
 			}
 		},
 		created() {
 			this.getCurrentUrl()
-			chrome.storage.sync.get((items) => {
+			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
 			})
 		}

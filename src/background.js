@@ -2,7 +2,7 @@
 
 // Handle omnibox shortcut
 chrome.omnibox.onInputEntered.addListener((input) => {
-	chrome.storage.sync.get((items) => {
+	chrome.storage.local.get((items) => {
 		const detaInstance = items.detaInstance
 
 		if (!detaInstance) {

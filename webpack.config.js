@@ -13,7 +13,6 @@ const config = {
 	context: path.join(__dirname, 'src'),
 	entry: {
 		'background': './background.js',
-		'content': './content.js',
 		'popup/index': './popup/index.js',
 		'options/index': './options/index.js'
 	},

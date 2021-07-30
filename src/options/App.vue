@@ -30,7 +30,7 @@
 		},
 		methods: {
 			save() {
-				chrome.storage.sync.set({ detaInstance: this.detaInstance }, () => {
+				chrome.storage.local.set({ detaInstance: this.detaInstance }, () => {
 					this.saveText = 'Saved!'
 
 					setTimeout(() => {
@@ -46,8 +46,7 @@
 			Logo
 		},
 		created() {
-			chrome.storage.sync.get((items) => {
-				console.log(items)
+			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
 			})
 		}

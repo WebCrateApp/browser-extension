@@ -33,17 +33,6 @@
       "background.js"
     ]
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "content.js"
-      ]
-    }
-  ],
   "icons": {
     "48": "icons/icon.svg",
     "96": "icons/icon.svg",
