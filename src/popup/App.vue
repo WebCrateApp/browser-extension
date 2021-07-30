@@ -8,6 +8,9 @@
 			</a>
 		</div>
 	</div>
+	<div v-else-if="state === 'loading'" class="wrapper">
+		<p>Adding link...</p>
+	</div>
 	<div v-else-if="state === 'success'" class="wrapper">
 		<h1>Link added!</h1>
 		<a :href="`${ this.detaInstance }/?link=${ link.id }`" target="_blank">
@@ -20,6 +23,9 @@
 		<a href="https://deta.space/login" target="_blank">
 			<button class="primary-button">Login to add a link</button>
 		</a>
+	</div>
+	<div v-else class="wrapper">
+		<p>Error: {{ error }}</p>
 	</div>
 </template>
 
@@ -34,6 +40,7 @@
 				link: undefined,
 				url: undefined,
 				detaInstance: undefined,
+				error: undefined,
 				errorMsgs: [
 					'Oh oh!',
 					'Whoops!',
@@ -69,6 +76,7 @@
 				})
 			},
 			create: async function () {
+				this.state = 'loading'
 				const res = await axios.post(`${ this.detaInstance }/api/link`, {
 					url: this.url
 				})
@@ -85,7 +93,8 @@
 					this.state = 'success'
 				} else {
 					console.log(res.data)
-					this.state === 'login'
+					this.error = res.data.message || res.data || 'Unknown error occurred!'
+					this.state === 'error'
 				}
 			}
 		},
