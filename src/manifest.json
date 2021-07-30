@@ -45,6 +45,8 @@
     }
   ],
   "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg",
     "512": "icons/icon.png"
   },
   "manifest_version": 2

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f5be6b"/>
+      <stop offset="1" stop-color="#df9930"/>
+    </linearGradient>
+  </defs>
+  <g id="Rechteck_532" data-name="Rechteck 532" stroke="#f5be6b" stroke-width="75" fill="url(#linear-gradient)">
+    <rect width="512" height="512" rx="40" stroke="none"/>
+    <rect x="37.5" y="37.5" width="437" height="437" rx="2.5" fill="none"/>
+  </g>
+</svg>
