@@ -7,10 +7,10 @@
 			<hr>
 			<label for="input">Deta Space instance:</label>
 			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.dev">
-			<p v-if="error">{{ error }}</p>
+			<p v-if="error" class="error">{{ error }}</p>
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
-				<a href="https://open.webcrate.app" target="_blank">
+				<a :href="detaInstance || 'https://open.webcrate.app'" target="_blank">
 					<button class="button">Open your WebCrate</button>
 				</a>
 			</div>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import axios from 'axios'
 	import '../main.scss'
 	import Logo from './components/Logo.vue'
 	
@@ -31,22 +32,48 @@
 			}
 		},
 		methods: {
-			save() {
+			async save() {
 				try {
+					this.saveText = 'Verifying...'
+
 					const detaInstance = this.parseUrl(this.detaInstance)
 					this.detaInstance = detaInstance
 
-					console.log(detaInstance)
+					const isValid = await this.verifyUrl()
+
+					if (!isValid) {
+						this.error = 'Invalid Deta instance!'
+						this.saveText = 'Save Settings'
+						return
+					}
 
 					chrome.storage.local.set({ detaInstance }, () => {
 						this.saveText = 'Saved!'
+						this.error = undefined
 
 						setTimeout(() => {
 							this.saveText = 'Save Settings'
-						}, 1000)
+						}, 2000)
 					})
 				} catch (e) {
-					this.error = 'Invalid URL'
+					this.error = 'Invalid Deta instance!'
+					this.saveText = 'Save Settings'
+				}
+			},
+			async verifyUrl() {
+				try {
+					await axios.get(`${ this.detaInstance }api/public/link`)
+
+					return false
+				} catch (err) {
+
+					if (err.response && err.response.status === 400) {
+						return true
+					}
+
+					console.error(err)
+
+					return false
 				}
 			},
 			restore(result) {
@@ -122,6 +149,10 @@
 		&:focus {
 			border: 2px solid var(--grey-light) !important;
 		}
+	}
+
+	.error {
+		color: var(--red);
 	}
 
 	.actions {
