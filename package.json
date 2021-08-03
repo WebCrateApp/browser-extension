@@ -1,7 +1,7 @@
 {
   "name": "webcrate-extension",
-  "version": "0.1.0",
-  "description": "Add links to WebCrate via a browser extension",
+  "version": "0.1.1",
+  "description": "Add links to your own WebCrate instance directly via the browser",
   "author": "Maximilian Schiller <schiller@mxis.ch>",
   "repository": {
     "type": "git",

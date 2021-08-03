@@ -1,9 +1,9 @@
 {
   "name": "WebCrate Browser Extension",
   "short_name": "WebCrate",
-  "author": "Maximilian Schiller <maxi@webcrate.app>",
-  "version": "0.1.0",
-  "description": "Add links to your WebCrate directly via the browser.",
+  "author": "Maximilian Schiller <hi@webcrate.app>",
+  "version": "0.1.1",
+  "description": "Add links to your own WebCrate instance directly via the browser",
   "homepage_url": "https://webcrate.app",
   "permissions": [
     "https://*.webcrate.app/*",
@@ -22,20 +22,24 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+L",
-        "mac": "MacCtrl+L"
+        "default": "Alt+Shift+L",
+        "mac": "Alt+Shift+L"
       }
     }
   },
-  "omnibox": { "keyword" : "wc" },
+  "omnibox": {
+    "keyword": "wc"
+  },
   "background": {
     "scripts": [
       "background.js"
     ]
   },
   "icons": {
-    "48": "icons/icon.svg",
-    "96": "icons/icon.svg",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png",
     "512": "icons/icon.png"
   },
   "manifest_version": 2
