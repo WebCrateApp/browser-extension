@@ -7,6 +7,7 @@
 			<hr>
 			<label for="input">Deta Space instance:</label>
 			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.dev">
+			<p v-if="error">{{ error }}</p>
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
 				<a href="https://open.webcrate.app" target="_blank">
@@ -25,21 +26,36 @@
 		data() {
 			return {
 				detaInstance: undefined,
-				saveText: 'Save Settings'
+				saveText: 'Save Settings',
+				error: undefined
 			}
 		},
 		methods: {
 			save() {
-				chrome.storage.local.set({ detaInstance: this.detaInstance }, () => {
-					this.saveText = 'Saved!'
+				try {
+					const detaInstance = this.parseUrl(this.detaInstance)
+					this.detaInstance = detaInstance
 
-					setTimeout(() => {
-						this.saveText = 'Save Settings'
-					}, 1000)
-				})
+					console.log(detaInstance)
+
+					chrome.storage.local.set({ detaInstance }, () => {
+						this.saveText = 'Saved!'
+
+						setTimeout(() => {
+							this.saveText = 'Save Settings'
+						}, 1000)
+					})
+				} catch (e) {
+					this.error = 'Invalid URL'
+				}
 			},
 			restore(result) {
 				this.detaInstance = result.detaInstance
+			},
+			parseUrl (rawUrl) {
+				const withProtocol = rawUrl.startsWith('http://') || rawUrl.startsWith('https://') ? rawUrl : `https://${ rawUrl }`
+
+				return new URL(withProtocol).toString()
 			}
 		},
 		components: {

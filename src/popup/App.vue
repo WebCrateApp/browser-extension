@@ -13,7 +13,7 @@
 	</div>
 	<div v-else-if="state === 'success'" class="wrapper">
 		<h1>Link added!</h1>
-		<a :href="`${ this.detaInstance }/?link=${ link.id }`" target="_blank">
+		<a :href="`${ this.detaInstance }?link=${ link.id }`" target="_blank">
 			<button class="primary-button">View link</button>
 		</a>
 	</div>
@@ -77,7 +77,7 @@
 			},
 			create: async function () {
 				this.state = 'loading'
-				const res = await axios.post(`${ this.detaInstance }/api/link`, {
+				const res = await axios.post(`${ this.detaInstance }api/link`, {
 					url: this.url
 				})
 
