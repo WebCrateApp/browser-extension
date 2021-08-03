@@ -19,8 +19,8 @@
 	</div>
 	<div v-else-if="state === 'login'" class="wrapper">
 		<h1>{{ errorMsg }}</h1>
-		<p>Please login to your WebCrate instance and try again!</p>
-		<a href="https://deta.space/login" target="_blank">
+		<p>Please login to your WebCrate instance and try again! If this keeps happening, make sure you set the correct URL in the settings.</p>
+		<a :href="detaInstance" target="_blank">
 			<button class="primary-button">Login to add a link</button>
 		</a>
 	</div>
@@ -76,25 +76,31 @@
 				})
 			},
 			create: async function () {
-				this.state = 'loading'
-				const res = await axios.post(`${ this.detaInstance }api/link`, {
-					url: this.url
-				})
+				try {
+					this.state = 'loading'
+					const res = await axios.post(`${ this.detaInstance }api/link`, {
+						url: this.url
+					})
 
-				if (res.request.responseURL.includes('deta.space/login')) {
-					console.log('Not authorized')
-					this.state === 'login'
-					return
-				}
+					// Check if we need to login by checking if we got redirected to the login page
+					if (res.request.responseURL.includes('deta.space/login')) {
+						this.state = 'login'
+						return
+					}
 
-				if (res.data.status === 200) {
 					this.link = res.data.data
 					this.url = undefined
 					this.state = 'success'
-				} else {
-					console.log(res.data)
-					this.error = res.data.message || res.data || 'Unknown error occurred!'
-					this.state === 'error'
+				} catch (err) {
+					// Assume it's a login error (we can't specifically check for that)
+					if (err.message === 'Network Error') {
+						this.state = 'login'
+						return
+					}
+
+					this.error = err.message || 'Unknown error occurred!'
+					this.state = 'error'
+					console.error(err)
 				}
 			}
 		},

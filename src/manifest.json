@@ -8,6 +8,7 @@
   "permissions": [
     "https://*.webcrate.app/*",
     "https://*.deta.dev/*",
+    "https://*.deta.app/*",
     "activeTab",
     "storage",
     "contextMenus"
