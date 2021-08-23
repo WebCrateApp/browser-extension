@@ -1,3 +1,3 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 console.log(browser)
 window.browser = browser
