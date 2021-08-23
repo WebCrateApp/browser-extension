@@ -47,9 +47,24 @@
 						return
 					}
 
+                    // Close window after configuration on startup validation
+                    let detaInstanceChromeStorage = undefined;
+                    let closeAfterUpdate = false;
+                    chrome.storage.local.get((items) => {
+                        detaInstanceChromeStorage = items.detaInstance
+                    })
+                    if (detaInstanceChromeStorage === undefined) closeAfterUpdate = true;
+
 					chrome.storage.local.set({ detaInstance }, () => {
 						this.saveText = 'Saved!'
 						this.error = undefined
+
+                        // Close window after configuration on startup
+                        if (closeAfterUpdate) {
+                            setTimeout(() => {
+                                window.close();
+                            }, 500);
+                        }
 
 						setTimeout(() => {
 							this.saveText = 'Save Settings'
