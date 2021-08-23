@@ -6,7 +6,7 @@
 			<p>To use the extension you need to connect it to your own WebCrate instance. Learn more in the <a href="https://webcrate.app/docs">documentation</a>.</p>
 			<hr>
 			<label for="input">Deta Space instance:</label>
-			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.dev">
+			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.app">
 			<p v-if="error" class="error">{{ error }}</p>
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
