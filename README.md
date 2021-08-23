@@ -1,26 +1,32 @@
-# webcrate-extension
+<div align="center">
 
-Browser extension for [WebCrate](https://webcrate.app)
+# 💻🌍 WebCrate Extension
 
-## Introduction
+Chrome/Firefox Browser extension for WebCrate
+
+[🔮 Website](https://webcrate.app) - [📚 Docs](https://webcrate.app/docs) - [🐞 Issues](https://github.com/WebCrateApp/feedback)
+
+<br/>
+
+</div>
+
+## 👋 Introduction
 
 This repo contains the browser extension for both Chrome and Firefox. It is build with Vue.js and uses the [WebCrate API](https://webcrate.app/docs/api) to add new links.
 
-## Installation
+## 🚀 Installation
 
-You have to build the extension manually (see below), use the pre-packaged version which can be found on the [releases tab](https://github.com/WebCrateApp/browser-extension/releases) or get the extension from the Addon Stores ([Chrome](https://chrome.google.com/webstore/category/extensions?hl=de), [Firefox](https://addons.mozilla.org/de/firefox/)).
+You can get the extension from the respective store for ([Chrome](https://chrome.google.com/webstore/category/extensions?hl=de) and [Firefox](https://addons.mozilla.org/de/firefox/)) or build the extension manually (see below).
 
-### Install from Addon Store (Chrome/Firefox)
+After the extension is installed successfully it will open the settings page where you have to paste the URL of your WebCrate instance.
 
-1. Open the Addon Store ([Chrome](https://chrome.google.com/webstore/category/extensions?hl=de), [Firefox](https://addons.mozilla.org/de/firefox/))
+## 📚 Usage 
 
-2. Search for "Webcrate" in the search bar
+Click the WebCrate logo in your toolbar and add a new link to your WebCrate instance. You can also use the keyboard shortcut (`Alt+Shift+L` by default) to open the popup.
 
-3. Click on the Install-Button and follow the installation instructions
+## 🔨 Building the extension manually
 
-### Building the extension (Chrome)
-
-Download the repo:
+Clone the repo:
 
 ```
 git clone https://github.com/WebCrateApp/browser-extension
