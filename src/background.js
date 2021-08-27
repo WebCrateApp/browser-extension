@@ -28,7 +28,7 @@ chrome.contextMenus.onClicked.addListener(({ menuItemId, linkUrl }) => {
 			})
 		} else if (menuItemId === 'report-bug') {
 			chrome.tabs.create({
-				url: 'https://github.com/WebCrateApp/feedback/issues/new/choose'
+				url: 'https://github.com/WebCrateApp/webcrate/issues/new/choose'
 			})
 		} else if (menuItemId === 'open-docs') {
 			chrome.tabs.create({
