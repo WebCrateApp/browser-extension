@@ -1,10 +1,28 @@
 <template>
 	<div v-if="state === 'load'" class="wrapper">
-		<input v-model="url" class="input" placeholder="url">
+		<p>Loading crates...</p>
+	</div>
+	<div v-else-if="state === 'done'" class="add-wrapper">
+		<div class="inputs">
+			<textarea v-model="url" v-focus class="input" placeholder="url" rows="3"></textarea>
+		</div>
+		<hr>
+		<div class="dropdown-wrapper">
+			<div class="dropdown">
+				<v-select
+					v-model="selectedCrate"
+					:reduce="item => item.id"
+					:options="crates"
+					:get-option-label="(crate) => `${ emojiIcon(crate.icon) } ${ crate.name }`"
+					placeholder="Select a crate (optional)"
+				></v-select>
+			</div>
+		</div>
+		<hr>
 		<div class="actions">
-			<button class="primary-button" @click.stop="create">Add Link</button>
+			<button class="primary-button" @click.stop="create">Add link to WebCrate</button>
 			<a :href="this.detaInstance" target="_blank">
-				<button class="button">Open WebCrate</button>
+				<button class="button">Open dashboard</button>
 			</a>
 		</div>
 	</div>
@@ -32,6 +50,7 @@
 <script>
 	import axios from 'axios'
 	import '../main.scss'
+	import emojis from './emojis'
 
 	export default {
 		data() {
@@ -40,6 +59,8 @@
 				link: undefined,
 				url: undefined,
 				detaInstance: undefined,
+				selectedCrate: undefined,
+				crates: [],
 				error: undefined,
 				errorMsgs: [
 					'Oh oh!',
@@ -56,6 +77,9 @@
 			}
 		},
 		methods: {
+			emojiIcon(name) {
+				return emojis[name]
+			},
 			getCurrentUrl() {
 				chrome.tabs.query({
 					currentWindow: true,
@@ -75,11 +99,24 @@
 					})
 				})
 			},
-			create: async function () {
+			async getCrates() {
+				const res = await axios.get(`${ this.detaInstance }api/crate`)
+
+				// Check if we need to login by checking if we got redirected to the login page
+				if (res.request.responseURL.includes('deta.space/login')) {
+					this.state = 'login'
+					return
+				}
+
+				this.crates = res.data.data
+				this.state = 'done'
+			},
+			async create() {
 				try {
 					this.state = 'loading'
 					const res = await axios.post(`${ this.detaInstance }api/link`, {
-						url: this.url
+						url: this.url,
+						crate: this.selectedCrate
 					})
 
 					// Check if we need to login by checking if we got redirected to the login page
@@ -108,37 +145,74 @@
 			this.getCurrentUrl()
 			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
+
+				if (!this.detaInstance) {
+					return chrome.runtime.openOptionsPage()
+				}
+
+				this.getCrates()
 			})
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	.add-wrapper {
+		text-align: center;
+		background: var(--background);
+		border-radius: var(--border-radius);
+		--padding-x: 1rem;
+		padding-bottom: 0.5rem;
+	}
+
 	.wrapper {
 		text-align: center;
 		padding: 1.5rem;
 		padding-bottom: 2rem;
 		background: var(--background);
 		border-radius: var(--border-radius);
+
+		& h1 {
+			margin-bottom: 1rem;
+			font-size: 1.2rem;
+		}
+
+		& p {
+			margin-bottom: 1rem;
+		}
 	}
 
-    h1 {
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-    }
-
-	p {
-		margin-bottom: 1rem;
+	.inputs {
+		padding: var(--padding-x);
+		padding-bottom: 0.5rem;
 	}
 
 	.actions {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		margin-top: 1rem;
+		padding: 0.5rem var(--padding-x);
 
 		& a {
-			margin-left: 1rem;
+			margin-left: auto;
+		}
+
+		& button {
+			font-size: 0.9rem;
+		}
+	}
+
+	.dropdown-wrapper {
+		display: flex;
+		align-items: center;
+		padding: 0.5rem var(--padding-x);
+
+		& p {
+			margin-right: 5rem;
+		}
+
+		& .dropdown {
+			margin-left: auto;
+			flex-grow: 1;
 		}
 	}
 </style>
