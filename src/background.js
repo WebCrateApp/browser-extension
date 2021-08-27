@@ -6,7 +6,7 @@ chrome.omnibox.onInputEntered.addListener((input) => {
 		const detaInstance = items.detaInstance
 
 		if (!detaInstance) {
-			return
+			return chrome.runtime.openOptionsPage()
 		}
 
 		const newURL = encodeURIComponent(input)
@@ -14,9 +14,13 @@ chrome.omnibox.onInputEntered.addListener((input) => {
 	})
 })
 
-chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+chrome.contextMenus.onClicked.addListener(({ menuItemId, linkUrl }) => {
 	chrome.storage.local.get((items) => {
 		const detaInstance = items.detaInstance
+
+		if (!detaInstance) {
+			return chrome.runtime.openOptionsPage()
+		}
 
 		if (menuItemId === 'view-links') {
 			chrome.tabs.create({
@@ -29,6 +33,10 @@ chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
 		} else if (menuItemId === 'open-docs') {
 			chrome.tabs.create({
 				url: 'https://webcrate.app/docs'
+			})
+		} else if (menuItemId === 'save-link') {
+			chrome.tabs.create({
+				url: `${ detaInstance }?addUrl=${ linkUrl }`
 			})
 		} else if (menuItemId === 'open-settings') {
 			chrome.runtime.openOptionsPage()
@@ -60,6 +68,12 @@ chrome.contextMenus.create({
 	title: 'Open settings',
 	id: 'open-settings',
 	contexts: [ 'browser_action' ]
+})
+
+chrome.contextMenus.create({
+	title: 'Save link to WebCrate',
+	id: 'save-link',
+	contexts: [ 'link' ]
 })
 
 // Show settings page after install
