@@ -2,7 +2,7 @@
 	<div class="settings">
 		<Logo />
 		<div class="wrapper">
-			<h1>WebCrate Extension Settings</h1>
+			<h1>🔨 Extension Settings</h1>
 			<p>To use the extension you need to connect it to your own WebCrate instance. Learn more in the <a href="https://webcrate.app/docs">documentation</a>.</p>
 			<hr>
 			<label for="input">Deta Space instance:</label>
@@ -14,6 +14,17 @@
 					<button class="button">Open your WebCrate</button>
 				</a>
 			</div>
+		</div>
+		<div class="wrapper">
+			<h1>📚 How to use it</h1>
+			<p>There are multiple ways to use the extension to add links to your WebCrate instance:</p>
+			<hr>
+			<h2>Popup</h2>
+			<p>Open the extension popup by clicking on the extension icon in the toolbar or use the keyboard shortcut (default is Alt+Shift+L).</p>
+			<h2>Context Menu</h2>
+			<p>Right click on an link and select "Add link to WebCrate" from the context menu.</p>
+			<h2>Omnibox</h2>
+			<p>Start typing "wc" in your address bar and hit tab. Everything you typ after that will be added as link to your WebCrate instance once you hit enter.</p>
 		</div>
 	</div>
 </template>
@@ -122,7 +133,7 @@
 	}
 
 	.settings {
-		padding-top: 5rem;
+		padding: 5rem 0;
 		width: 95%;
 		max-width: 700px;
 		margin: auto;
@@ -137,7 +148,11 @@
 
     h1 {
         margin-bottom: 1rem;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+    }
+
+	h2 {
+        font-size: 1rem;
     }
 
 	a {
