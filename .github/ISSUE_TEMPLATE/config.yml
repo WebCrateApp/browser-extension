@@ -4,13 +4,13 @@ contact_links:
     url: https://webcrate.app/docs
     about: Checkout WebCrate's documentation before opening an issue.
   - name: 🐛 Bug Report
-    url: https://github.com/WebCrateApp/feedback/issues/new?labels=bug,extension&template=bug_report.md
+    url: https://github.com/WebCrateApp/webcrate/issues/new?assignees=BetaHuhn&labels=bug%2Ctriage&template=bug_report.yml
     about: Create a bug report to help us improve
   - name: 🚀 Feature Request
-    url: https://github.com/WebCrateApp/feedback/discussions/new?category=ideas
+    url: https://github.com/WebCrateApp/webcrate/discussions/new?category=ideas
     about: Share ideas for new features
   - name: ❓ Ask a Question
-    url: https://github.com/WebCrateApp/feedback/discussions/new?category=q-a
+    url: https://github.com/WebCrateApp/webcrate/discussions/new?category=q-a
     about: Ask the community for help
   - name: 📧 Contact support
     url: https://webcrate.app/contact
