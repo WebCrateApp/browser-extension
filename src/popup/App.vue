@@ -100,16 +100,28 @@
 				})
 			},
 			async getCrates() {
-				const res = await axios.get(`${ this.detaInstance }api/crate`)
+				try {
+					const res = await axios.get(`${ this.detaInstance }api/crate`)
 
-				// Check if we need to login by checking if we got redirected to the login page
-				if (res.request.responseURL.includes('deta.space/login')) {
-					this.state = 'login'
-					return
+					// Check if we need to login by checking if we got redirected to the login page
+					if (res.request.responseURL.includes('deta.space/login')) {
+						this.state = 'login'
+						return
+					}
+
+					this.crates = res.data.data
+					this.state = 'done'
+				} catch (err) {
+					// Assume it's a login error (we can't specifically check for that)
+					if (err.message === 'Network Error') {
+						this.state = 'login'
+						return
+					}
+
+					this.error = err.message || 'Unknown error occurred!'
+					this.state = 'error'
+					console.error(err)
 				}
-
-				this.crates = res.data.data
-				this.state = 'done'
 			},
 			async create() {
 				try {
