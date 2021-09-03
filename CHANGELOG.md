@@ -1,3 +1,15 @@
+## [v1.0.1] - 2021-09-03
+
+[Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.0.1) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.0.0...v1.0.1) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.0.1) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.0.1.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.0.1.tar.gz))
+
+### Bug fixes
+
+- [`a8b1aca`](https://github.com/WebCrateApp/browser-extension/commit/a8b1aca)  Intercept authentication error when loading crates
+
+### Dependency updates
+
+- [`f0e6f6a`](https://github.com/WebCrateApp/browser-extension/commit/f0e6f6a)  Upgrade dependencies
+
 ## [v1.0.0] - 2021-08-27
 
 [Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.0.0) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.0.0) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.0.0.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.0.0.tar.gz))
