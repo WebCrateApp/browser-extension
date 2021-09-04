@@ -14,7 +14,8 @@ const config = {
 	entry: {
 		'background': './background.js',
 		'popup/index': './popup/index.js',
-		'options/index': './options/index.js'
+		'options/index': './options/index.js',
+		'import/index': './import/index.js'
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -88,6 +89,11 @@ const config = {
 		{
 			from: 'options/index.html',
 			to: 'options/index.html',
+			transform: transformHtml
+		},
+		{
+			from: 'import/index.html',
+			to: 'import/index.html',
 			transform: transformHtml
 		},
 		{

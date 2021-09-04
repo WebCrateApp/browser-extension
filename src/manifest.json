@@ -11,7 +11,8 @@
     "https://*.deta.app/*",
     "activeTab",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "bookmarks"
   ],
   "options_ui": {
     "open_in_tab": true,

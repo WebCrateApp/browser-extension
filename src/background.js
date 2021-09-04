@@ -38,6 +38,10 @@ chrome.contextMenus.onClicked.addListener(({ menuItemId, linkUrl }) => {
 			chrome.tabs.create({
 				url: `${ detaInstance }?addUrl=${ linkUrl }`
 			})
+		} else if (menuItemId === 'import-bookmarks') {
+			chrome.tabs.create({
+				url: chrome.runtime.getURL('./import/index.html')
+			})
 		} else if (menuItemId === 'open-settings') {
 			chrome.runtime.openOptionsPage()
 		}
@@ -67,6 +71,12 @@ chrome.contextMenus.create({
 chrome.contextMenus.create({
 	title: 'Open settings',
 	id: 'open-settings',
+	contexts: [ 'browser_action' ]
+})
+
+chrome.contextMenus.create({
+	title: 'Import existing bookmarks',
+	id: 'import-bookmarks',
 	contexts: [ 'browser_action' ]
 })
 
