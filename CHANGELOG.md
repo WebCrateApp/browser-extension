@@ -1,3 +1,15 @@
+## [v1.1.0] - 2021-09-07
+
+[Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.1.0) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.0.1...v1.1.0) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.1.0) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.1.0.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.1.0.tar.gz))
+
+### New features
+
+- [`07b8f13`](https://github.com/WebCrateApp/browser-extension/commit/07b8f13)  Import existing bookmarks from the browser
+
+### Dependency updates
+
+- [`ba37370`](https://github.com/WebCrateApp/browser-extension/commit/ba37370)  Upgrade dependencies
+
 ## [v1.0.1] - 2021-09-03
 
 [Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.0.1) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.0.0...v1.0.1) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.0.1) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.0.1.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.0.1.tar.gz))
