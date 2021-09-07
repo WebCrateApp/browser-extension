@@ -4,7 +4,7 @@
 		<div v-if="state === 'load'">
 			<div class="wrapper">
 				<h1>Import existing bookmarks</h1>
-				<p>Here are all bookmarks which where found in this browser. Since WebCrate doesn't support nested crates your folder structure may have been flattened. A new crate will be created for each of your folders.</p>
+				<p>Here are all bookmarks which where found in this browser. Since WebCrate doesn't support nested crates your folder structure may have been flattened. A new crate will be created for each of your folders. For now importing bookmarks will skip parsing a link title, description and image for each link since it would take for ever with that many links, instead it will reuse the title of the bookmark.</p>
 				<p>You can select all or choose individual bookmarks you want to import into your WebCrate. You can also select a folder to import all of its bookmarks.</p>
 				<div class="actions">
 					<button class="primary-button" @click="importSelected">Import selected <span v-if="selected.length > 0">({{ selected.length }})</span></button>
