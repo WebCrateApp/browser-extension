@@ -33,7 +33,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",
     "@babel/preset-env": "^7.15.4",
     "@babel/runtime-corejs3": "^7.15.4",
-    "@betahuhn/config": "^1.1.0",
+    "@betahuhn/config": "^1.2.0",
     "@types/chrome": "^0.0.134",
     "archiver": "^3.0.0",
     "babel-loader": "^8.2.2",
