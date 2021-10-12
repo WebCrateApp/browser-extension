@@ -16,7 +16,7 @@ This repo contains the browser extension for both Chrome and Firefox. It is buil
 
 ## 🚀 Installation
 
-You can get the extension from the respective store for ([Chrome](https://chrome.google.com/webstore/category/extensions?hl=de) and [Firefox](https://addons.mozilla.org/de/firefox/)) or build the extension manually (see below).
+You can get the extension from the respective store for ([Chrome](https://chrome.google.com/webstore/detail/webcrate-browser-extensio/hfioihmgjcjdepficckgginjciabkndc) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/webcrate/)) or build the extension manually (see below).
 
 After the extension is installed successfully it will open the settings page where you have to paste the URL of your WebCrate instance.
 
