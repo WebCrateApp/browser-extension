@@ -1,3 +1,12 @@
+## [v1.1.1] - 2022-01-02
+
+[Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.1.1) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.1.0...v1.1.1) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.1.1) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.1.1.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.1.1.tar.gz))
+
+### Bug fixes
+
+- [`1f11799`](https://github.com/WebCrateApp/browser-extension/commit/1f11799)  Load more than 20 crates
+- [`d1c63f5`](https://github.com/WebCrateApp/browser-extension/commit/d1c63f5)  Use different path to open instance during setup
+
 ## [v1.1.0] - 2021-09-07
 
 [Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.1.0) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.0.1...v1.1.0) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.1.0) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.1.0.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.1.0.tar.gz))
