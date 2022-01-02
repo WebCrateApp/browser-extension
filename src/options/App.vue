@@ -10,7 +10,7 @@
 			<p v-if="error" class="error">{{ error }}</p>
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
-				<a :href="detaInstance || 'https://open.webcrate.app'" target="_blank">
+				<a :href="detaInstance || 'https://webcrate.app/open'" target="_blank">
 					<button class="button">Open your WebCrate</button>
 				</a>
 			</div>
