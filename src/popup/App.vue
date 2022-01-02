@@ -101,7 +101,7 @@
 			},
 			async getCrates() {
 				try {
-					const res = await axios.get(`${ this.detaInstance }api/crate`)
+					const res = await axios.get(`${ this.detaInstance }api/crate?limit=0`)
 
 					// Check if we need to login by checking if we got redirected to the login page
 					if (res.request.responseURL.includes('deta.space/login')) {
