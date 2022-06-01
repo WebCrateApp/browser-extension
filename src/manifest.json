@@ -2,7 +2,7 @@
   "name": "WebCrate Browser Extension",
   "short_name": "WebCrate",
   "author": "Maximilian Schiller <hi@webcrate.app>",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Add links to your own WebCrate instance directly via the browser",
   "homepage_url": "https://webcrate.app",
   "permissions": [
