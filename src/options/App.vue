@@ -5,8 +5,19 @@
 			<h1>🔨 Extension Settings</h1>
 			<p>To use the extension you need to connect it to your own WebCrate instance. Learn more in the <a href="https://webcrate.app/docs">documentation</a>.</p>
 			<hr>
-			<label for="input">Deta Space instance:</label>
-			<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.app">
+
+			<div class="fields">
+				<div class="field">
+					<label for="input">App Instance:</label>
+					<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.app">
+				</div>
+
+				<div class="field">
+					<label for="api_key">App API Key:</label>
+					<input v-model="appApiKey" id="api_key" class="input" placeholder="api key">
+				</div>
+			</div>
+
 			<p v-if="error" class="error">{{ error }}</p>
 			<div class="actions">
 				<button class="primary-button" @click.stop="save">{{ saveText }}</button>
@@ -38,6 +49,7 @@
 		data() {
 			return {
 				detaInstance: undefined,
+				appApiKey: undefined,
 				saveText: 'Save Settings',
 				error: undefined,
 				closeAfterUpdate: false
@@ -53,13 +65,15 @@
 
 					const isValid = await this.verifyUrl()
 
+					console.log(isValid)
+
 					if (!isValid) {
-						this.error = 'Invalid Deta instance!'
+						this.error = 'Invalid app instance or API key!'
 						this.saveText = 'Save Settings'
 						return
 					}
 
-					chrome.storage.local.set({ detaInstance }, () => {
+					chrome.storage.local.set({ detaInstance, appApiKey: this.appApiKey }, () => {
 						this.saveText = 'Saved!'
 						this.error = undefined
 
@@ -75,21 +89,21 @@
 						}, 2000)
 					})
 				} catch (e) {
+					console.log(e)
 					this.error = 'Invalid Deta instance!'
 					this.saveText = 'Save Settings'
 				}
 			},
 			async verifyUrl() {
 				try {
-					await axios.get(`${ this.detaInstance }api/public/link`)
+					await axios.get(`${ this.detaInstance }server/api/config`, {
+						headers: {
+							'X-Space-App-Key': this.appApiKey
+						}
+					})
 
-					return false
+					return true
 				} catch (err) {
-
-					if (err.response && err.response.status === 400) {
-						return true
-					}
-
 					console.error(err)
 
 					return false
@@ -97,6 +111,7 @@
 			},
 			restore(result) {
 				this.detaInstance = result.detaInstance
+				this.appApiKey = result.appApiKey
 			},
 			parseUrl (rawUrl) {
 				const withProtocol = rawUrl.startsWith('http://') || rawUrl.startsWith('https://') ? rawUrl : `https://${ rawUrl }`
@@ -116,6 +131,7 @@
 				}
 
 				this.detaInstance = items.detaInstance
+				this.appApiKey = items.appApiKey
 			})
 		}
 	}
@@ -165,6 +181,12 @@
 
 	hr {
 		margin-bottom: 1rem;
+	}
+
+	.fields {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 	label {

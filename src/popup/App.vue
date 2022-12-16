@@ -59,6 +59,7 @@
 				link: undefined,
 				url: undefined,
 				detaInstance: undefined,
+				appApiKey: undefined,
 				selectedCrate: undefined,
 				crates: [],
 				error: undefined,
@@ -101,7 +102,11 @@
 			},
 			async getCrates() {
 				try {
-					const res = await axios.get(`${ this.detaInstance }api/crate?limit=0`)
+					const res = await axios.get(`${ this.detaInstance }server/api/crate?limit=0`, {
+						headers: {
+							'X-Space-App-Key': this.appApiKey
+						}
+					})
 
 					// Check if we need to login by checking if we got redirected to the login page
 					if (res.request.responseURL.includes('deta.space/login')) {
@@ -126,9 +131,13 @@
 			async create() {
 				try {
 					this.state = 'loading'
-					const res = await axios.post(`${ this.detaInstance }api/link`, {
+					const res = await axios.post(`${ this.detaInstance }server/api/link`, {
 						url: this.url,
 						crate: this.selectedCrate
+					}, {
+						headers: {
+							'X-Space-App-Key': this.appApiKey
+						}
 					})
 
 					// Check if we need to login by checking if we got redirected to the login page
@@ -157,8 +166,9 @@
 			this.getCurrentUrl()
 			chrome.storage.local.get((items) => {
 				this.detaInstance = items.detaInstance
+				this.appApiKey = items.appApiKey
 
-				if (!this.detaInstance) {
+				if (!this.detaInstance || !this.appApiKey) {
 					return chrome.runtime.openOptionsPage()
 				}
 
