@@ -9,12 +9,12 @@
 			<div class="fields">
 				<div class="field">
 					<label for="input">App Instance:</label>
-					<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate.username.deta.app">
+					<input v-model="detaInstance" id="input" class="input" placeholder="https://webcrate-random.deta.app">
 				</div>
 
 				<div class="field">
-					<label for="api_key">App API Key:</label>
-					<input v-model="appApiKey" id="api_key" class="input" placeholder="api key">
+					<label for="api_key">App API Key (optional):</label>
+					<input v-model="appApiKey" type="password" id="api_key" class="input" placeholder="API Key">
 				</div>
 			</div>
 
@@ -96,11 +96,11 @@
 			},
 			async verifyUrl() {
 				try {
-					await axios.get(`${ this.detaInstance }server/api/config`, {
+					await axios.get(`${ this.detaInstance }api/config`, this.appApiKey ? {
 						headers: {
 							'X-Space-App-Key': this.appApiKey
 						}
-					})
+					} : undefined)
 
 					return true
 				} catch (err) {

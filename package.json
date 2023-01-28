@@ -10,7 +10,7 @@
   "homepage": "https://webcrate.app",
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=10 <15"
   },
   "scripts": {
     "update-manifest": "node scripts/update-manifest.js",
