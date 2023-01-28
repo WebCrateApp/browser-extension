@@ -1,3 +1,12 @@
+## [v1.2.0] - 2023-01-28
+
+[Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.2.0) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.1.1...v1.2.0) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.2.0) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.2.0.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.2.0.tar.gz))
+
+### New features
+
+- [`e4eb166`](https://github.com/WebCrateApp/browser-extension/commit/e4eb166)  Use new Space features like API keys &amp; fix small bugs (#23)
+(Issues: [`#23`](https://github.com/WebCrateApp/browser-extension/issues/23))
+
 ## [v1.1.1] - 2022-01-02
 
 [Release notes](https://github.com/WebCrateApp/browser-extension/releases/tag/v1.1.1) · [Compare](https://github.com/WebCrateApp/browser-extension/compare/v1.1.0...v1.1.1) · [Tag](https://github.com/WebCrateApp/browser-extension/tree/v1.1.1) · Archive ([zip](https://github.com/WebCrateApp/browser-extension/archive/v1.1.1.zip) · [tar.gz](https://github.com/WebCrateApp/browser-extension/archive/v1.1.1.tar.gz))
