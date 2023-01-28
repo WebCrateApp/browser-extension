@@ -91,7 +91,11 @@
 			async importSelected() {
 				try {
 					this.state = 'loading'
-					const res = await axios.post(`${ this.detaInstance }api/link/bulk`, this.selected)
+					const res = await axios.post(`${ this.detaInstance }api/link/bulk`, this.selected, this.appApiKey ? {
+						headers: {
+							'X-Space-App-Key': this.appApiKey
+						}
+					} : undefined)
 
 					// Check if we need to login by checking if we got redirected to the login page
 					if (res.request.responseURL.includes('deta.space/login')) {
@@ -136,6 +140,7 @@
 				}
 
 				this.detaInstance = items.detaInstance
+				this.appApiKey = items.appApiKey
 			})
 
 			this.getBookmarks()
