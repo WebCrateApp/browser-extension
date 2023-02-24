@@ -4,6 +4,7 @@
 	</div>
 	<div v-else-if="state === 'done'" class="add-wrapper">
 		<div class="inputs">
+            <input v-model="title" id="input" class="input" placeholder="Link title (optional)">
 			<textarea v-model="url" v-focus class="input" placeholder="url" rows="3"></textarea>
 		</div>
 		<hr>
@@ -56,6 +57,7 @@
 		data() {
 			return {
 				state: 'load',
+                title: undefined,
 				link: undefined,
 				url: undefined,
 				detaInstance: undefined,
@@ -133,6 +135,7 @@
 				try {
 					this.state = 'loading'
 					const res = await axios.post(`${ this.detaInstance }api/link`, {
+                        title: this.title,
 						url: this.url,
 						crate: this.selectedCrate
 					}, this.appApiKey ? {
@@ -147,6 +150,7 @@
 						return
 					}
 
+                    this.title = undefined
 					this.link = res.data.data
 					this.url = undefined
 					this.state = 'success'
@@ -208,7 +212,17 @@
 	.inputs {
 		padding: var(--padding-x);
 		padding-bottom: 0.5rem;
-	}
+	
+        input {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--grey) !important;
+
+            &:focus {
+                border: 2px solid var(--grey-light) !important;
+            }
+        }
+    }
 
 	.actions {
 		display: flex;
