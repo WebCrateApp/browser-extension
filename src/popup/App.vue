@@ -57,7 +57,7 @@
 		data() {
 			return {
 				state: 'load',
-                title:undefined,
+                title: undefined,
 				link: undefined,
 				url: undefined,
 				detaInstance: undefined,
