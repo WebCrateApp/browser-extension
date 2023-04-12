@@ -41,7 +41,7 @@
     "core-js": "^3.17.2",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.0",
-    "ejs": "^2.6.1",
+    "ejs": "^3.1.7",
     "eslint": "^7.32.0",
     "file-loader": "^5.0.2",
     "mini-css-extract-plugin": "^0.9.0",
